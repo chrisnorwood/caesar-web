@@ -10,5 +10,23 @@
             <input type="text" name="text" />
             <input type="submit" value="Submit!" />
         </form>
+        <br />
+        <span id="result"></span>
+
+        <script type="text/javascript">
+            $("#cipher").submit(function(event) {
+                event.preventDefault();
+
+                var $form = $(this),
+                    term = $form.find("input[name='text']").val(),
+                    url = $form.attr("action");
+
+                var posting = $.post(url, {text: term});
+
+                posting.done(function(data) {
+                    $("#result").html(data);
+                });
+            });
+        </script>
     </body>
 </html>
