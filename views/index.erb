@@ -3,12 +3,51 @@
     <head>
         <title>Caesar Cipher</title>
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+        <style type="text/css">
+            body {
+                background-color: #4D4F4F;
+                color: gray;
+                font-family: "Courier New", monospace, sans-serif;
+                padding: 10%;
+                display: table;
+                margin: auto;
+            }
+
+            h1 {
+                text-align: center;
+            }
+
+            label, input {
+                margin: auto;
+            }
+
+            label {
+                font-size: 17px;
+                width: 75px;
+                float: left;
+            }
+
+            input[type=text] {
+                float: right;
+                margin-top: 0.2em;
+                width: 200px;
+            }
+
+            input[type=submit] {
+                margin-top: 1em;
+                width: 100%;
+                display: block;
+            }
+        </style>
     </head>
     <body>
         <h1>Caesar Cipher</h1>
         <form action="/cipher" method="post" id="cipher">
-            <input type="text" name="text" />
-            <input type="submit" value="Submit!" />
+            <label for="text">Text:</label>
+            <input type="text" name="text" /> <br />
+            <label for="shift">Shift:</label>
+            <input type="text" name="shift" /> <br />
+            <input type="submit" value="Submit" />
         </form>
         <br />
         <span id="result"></span>
@@ -18,10 +57,11 @@
                 event.preventDefault();
 
                 var $form = $(this),
-                    term = $form.find("input[name='text']").val(),
+                    text = $form.find("input[name='text']").val(),
+                    shift = $form.find("input[name='shift']").val(),
                     url = $form.attr("action");
 
-                var posting = $.post(url, {text: term});
+                var posting = $.post(url, {text: text, shift: shift});
 
                 posting.done(function(data) {
                     $("#result").html(data);

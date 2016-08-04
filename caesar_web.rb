@@ -29,7 +29,9 @@ get '/' do
 end
 
 post '/cipher' do
-  text = params[:text]
-  
-  caesar_cipher(text)
+  text  = params[:text]
+  shift = params[:shift].to_i
+  shift = (shift != 0) ? shift : 3
+
+  caesar_cipher(text, shift)
 end
